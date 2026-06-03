@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XcelPro Solutions — Excel Experts for Growing Businesses</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #1D9E75;
+    --green-dark: #0F6E56;
+    --green-light: #E1F5EE;
+    --green-mid: #5DCAA5;
+    --off-white: #F7F6F1;
+    --ink: #1a1a18;
+    --ink-soft: #444441;
+    --ink-muted: #888780;
+    --border: rgba(0,0,0,0.08);
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(247,246,241,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .logo span { color: var(--green); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--ink-soft);
+    font-size: 0.9rem; font-weight: 400; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-cta {
+    background: var(--ink); color: #fff;
+    padding: 0.6rem 1.4rem; border-radius: 4px;
+    text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--green-dark); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding-top: 80px;
+  }
+  .hero-left {
+    padding: 7rem 4rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--green-light); color: var(--green-dark);
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.35rem 0.9rem; border-radius: 2px;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+  .hero-tag::before { content: '●'; font-size: 0.5rem; }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .accent { color: var(--green); }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--ink-soft); font-weight: 300;
+    max-width: 420px; line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--green); color: #fff;
+    padding: 0.85rem 2rem; border-radius: 4px;
+    text-decoration: none; font-size: 0.95rem; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .btn-ghost {
+    border: 1.5px solid var(--ink); color: var(--ink);
+    padding: 0.85rem 2rem; border-radius: 4px;
+    text-decoration: none; font-size: 0.95rem; font-weight: 500;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex; gap: 2rem; margin-top: 3.5rem;
+    padding-top: 2rem; border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem; color: var(--ink); line-height: 1;
+  }
+  .stat-label { font-size: 0.78rem; color: var(--ink-muted); margin-top: 0.2rem; }
+
+  .hero-right {
+    background: var(--ink);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    padding: 4rem 3rem;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px
+    ), repeating-linear-gradient(
+      90deg, transparent, transparent 39px, rgba(255,255,255,0.03) 39px, rgba(255,255,255,0.03) 40px
+    );
+  }
+  .dashboard-mock {
+    width: 100%; max-width: 420px;
+    background: #1e1e1c; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden; position: relative; z-index: 1;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  .dash-header {
+    background: #252523; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .dash-title { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-left: 0.5rem; }
+  .dash-body { padding: 1.25rem; }
+  .dash-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-bottom: 1rem; }
+  .metric-card {
+    background: #2a2a28; border-radius: 8px; padding: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .metric-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: #fff; }
+  .metric-val.g { color: var(--green-mid); }
+  .metric-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.35); margin-top: 0.1rem; }
+  .dash-chart-area {
+    background: #2a2a28; border-radius: 8px; padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.06); margin-bottom: 0.75rem;
+  }
+  .chart-label { font-size: 0.65rem; color: rgba(255,255,255,0.3); margin-bottom: 0.75rem; }
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 70px; }
+  .bar {
+    flex: 1; border-radius: 3px 3px 0 0;
+    background: rgba(93,202,165,0.25);
+    transition: background 0.2s;
+    position: relative;
+  }
+  .bar.active { background: var(--green-mid); }
+  .dash-row { display: flex; gap: 0.75rem; }
+  .dash-mini {
+    flex: 1; background: #2a2a28; border-radius: 8px; padding: 0.75rem;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .mini-lbl { font-size: 0.6rem; color: rgba(255,255,255,0.3); margin-bottom: 0.4rem; }
+  .progress-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--green-mid); border-radius: 2px; }
+
+  /* MARQUEE */
+  .marquee-section {
+    background: var(--green); padding: 1rem 0; overflow: hidden;
+  }
+  .marquee-track {
+    display: flex; gap: 3rem; white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem; letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.85);
+  }
+  .marquee-dot { color: rgba(255,255,255,0.4); }
+
+  /* SERVICES */
+  .section { padding: 6rem 4rem; }
+  .section-tag {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    letter-spacing: 0.02em; line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--ink-soft); font-size: 1rem; font-weight: 300;
+    max-width: 520px; line-height: 1.7; margin-bottom: 3.5rem;
+  }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: var(--border); border: 1.5px solid var(--border); }
+  .service-card {
+    background: var(--card-bg); padding: 2.5rem;
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .service-card:hover { background: var(--green-light); }
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem; color: var(--green-light);
+    line-height: 1; margin-bottom: 1rem;
+    -webkit-text-stroke: 1.5px var(--green-mid);
+  }
+  .service-title { font-size: 1.1rem; font-weight: 500; margin-bottom: 0.75rem; }
+  .service-desc { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
+  .service-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+  .tag {
+    font-size: 0.7rem; padding: 0.2rem 0.6rem;
+    background: var(--off-white); color: var(--ink-muted);
+    border-radius: 2px; border: 1px solid var(--border);
+  }
+
+  /* PROCESS */
+  .process-section { background: var(--ink); padding: 6rem 4rem; }
+  .process-section .section-tag { color: var(--green-mid); }
+  .process-section h2 { color: #fff; }
+  .process-section .section-sub { color: rgba(255,255,255,0.5); }
+  .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+  .process-steps::before {
+    content: '';
+    position: absolute; top: 1.5rem; left: 10%; right: 10%;
+    height: 1px; background: rgba(255,255,255,0.1);
+  }
+  .step { padding: 0 2rem 0 0; position: relative; }
+  .step-circle {
+    width: 3rem; height: 3rem; border-radius: 50%;
+    background: var(--green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+    margin-bottom: 1.5rem; position: relative; z-index: 1;
+  }
+  .step-title { color: #fff; font-weight: 500; margin-bottom: 0.5rem; }
+  .step-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); font-weight: 300; line-height: 1.6; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .pricing-card {
+    background: var(--card-bg); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-card.featured { border-color: var(--green); }
+  .pricing-card.featured::before {
+    content: 'Most Popular';
+    position: absolute; top: 1rem; right: 1rem;
+    background: var(--green); color: #fff;
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem; border-radius: 2px;
+  }
+  .plan-name { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem; }
+  .plan-price {
+    font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+    color: var(--ink); line-height: 1; margin-bottom: 0.25rem;
+  }
+  .plan-price sup { font-size: 1.2rem; vertical-align: super; }
+  .plan-period { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 1.5rem; }
+  .plan-features { list-style: none; margin-bottom: 2rem; }
+  .plan-features li {
+    font-size: 0.88rem; color: var(--ink-soft); padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border); font-weight: 300;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .plan-features li::before { content: '✓'; color: var(--green); font-weight: 500; flex-shrink: 0; }
+  .btn-plan {
+    display: block; text-align: center; padding: 0.75rem;
+    border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    transition: all 0.2s;
+  }
+  .btn-plan-outline { border: 1.5px solid var(--ink); color: var(--ink); }
+  .btn-plan-outline:hover { border-color: var(--green); color: var(--green); }
+  .btn-plan-filled { background: var(--green); color: #fff; }
+  .btn-plan-filled:hover { background: var(--green-dark); }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--off-white); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testimonial-card {
+    background: var(--card-bg); border: 1.5px solid var(--border);
+    border-radius: 8px; padding: 2rem;
+  }
+  .testimonial-quote { font-size: 2rem; color: var(--green); line-height: 1; margin-bottom: 1rem; font-family: Georgia, serif; }
+  .testimonial-text { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.7; font-weight: 300; margin-bottom: 1.5rem; font-style: italic; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .author-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green-light); color: var(--green-dark);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 500;
+  }
+  .author-name { font-size: 0.85rem; font-weight: 500; }
+  .author-role { font-size: 0.75rem; color: var(--ink-muted); }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--green); padding: 6rem 4rem;
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center; gap: 4rem;
+  }
+  .cta-section h2 { color: #fff; margin-bottom: 1rem; }
+  .cta-sub { color: rgba(255,255,255,0.75); font-weight: 300; font-size: 1rem; }
+  .btn-cta-white {
+    background: #fff; color: var(--green-dark);
+    padding: 1rem 2.5rem; border-radius: 4px;
+    text-decoration: none; font-size: 1rem; font-weight: 500;
+    white-space: nowrap; transition: transform 0.15s;
+    display: inline-block;
+  }
+  .btn-cta-white:hover { transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #fff; }
+  .footer-logo span { color: var(--green-mid); }
+  .footer-links { display: flex; gap: 2rem; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-mid); }
+  .footer-copy { color: rgba(255,255,255,0.25); font-size: 0.78rem; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* CONTACT */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .contact-icon { font-size: 1.4rem; width: 2.5rem; height: 2.5rem; background: var(--green-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.2rem; }
+  .contact-value { font-size: 0.95rem; color: var(--ink); text-decoration: none; font-weight: 400; }
+  .contact-value:hover { color: var(--green); }
+
+  .contact-form-wrap { background: var(--off-white); border-radius: 12px; padding: 2.5rem; border: 1.5px solid var(--border); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .form-group label { font-size: 0.82rem; font-weight: 500; color: var(--ink-soft); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 0.7rem 0.9rem; border: 1.5px solid var(--border);
+    border-radius: 6px; font-size: 0.9rem; font-family: inherit;
+    background: #fff; color: var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none; width: 100%;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--green); box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+  }
+  .form-group input.error, .form-group select.error, .form-group textarea.error {
+    border-color: #E24B4A;
+  }
+  .field-error { font-size: 0.75rem; color: #E24B4A; min-height: 1rem; }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .btn-submit {
+    width: 100%; padding: 0.9rem;
+    background: var(--green); color: #fff; border: none;
+    border-radius: 6px; font-size: 1rem; font-weight: 500;
+    font-family: inherit; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-submit:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-submit:disabled { background: var(--ink-muted); cursor: not-allowed; transform: none; }
+
+
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 6rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .process-steps::before { display: none; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .cta-section { grid-template-columns: 1fr; text-align: center; }
+    .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Xcel<span>Pro</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Free Audit</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left fade-up">
+    <div class="hero-tag">Excel & Data Solutions</div>
+    <h1>Turn Your <span class="accent">Data</span> Into Decisions</h1>
+    <p class="hero-sub">We build powerful Excel dashboards, automated reports, and data systems that save your team hours every week — so you can focus on growing your business.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Project</a>
+      <a href="#services" class="btn-ghost">See Our Work</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Projects delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Hours saved per client/week</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Remote & worldwide</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="dashboard-mock">
+      <div class="dash-header">
+        <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+        <span class="dash-title">Sales Dashboard — Q2 2025</span>
+      </div>
+      <div class="dash-body">
+        <div class="dash-metrics">
+          <div class="metric-card">
+            <div class="metric-val g">$84K</div>
+            <div class="metric-lbl">Revenue</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val">247</div>
+            <div class="metric-lbl">Orders</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val g">↑18%</div>
+            <div class="metric-lbl">Growth</div>
+          </div>
+        </div>
+        <div class="dash-chart-area">
+          <div class="chart-label">Monthly Revenue</div>
+          <div class="bars">
+            <div class="bar" style="height:40%"></div>
+            <div class="bar" style="height:55%"></div>
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:70%"></div>
+            <div class="bar active" style="height:90%"></div>
+            <div class="bar" style="height:75%"></div>
+            <div class="bar" style="height:60%"></div>
+            <div class="bar" style="height:85%"></div>
+          </div>
+        </div>
+        <div class="dash-row">
+          <div class="dash-mini">
+            <div class="mini-lbl">Target hit</div>
+            <div style="color:#fff; font-size:0.9rem; font-weight:500; margin-bottom:0.4rem;">84%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div>
+          </div>
+          <div class="dash-mini">
+            <div class="mini-lbl">Efficiency</div>
+            <div style="color:#fff; font-size:0.9rem; font-weight:500; margin-bottom:0.4rem;">92%</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Excel Dashboards</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">VBA Automation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Power BI Reports</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Data Cleaning</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">MIS Systems</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Financial Models</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Google Sheets</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Monthly Retainers</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Excel Dashboards</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">VBA Automation</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Power BI Reports</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Data Cleaning</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">MIS Systems</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Financial Models</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Google Sheets</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Monthly Retainers</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="section-tag fade-up">What We Offer</div>
+  <h2 class="fade-up">Services Built <br>For Results</h2>
+  <p class="section-sub fade-up">Every solution is custom-built for your business. No templates. No guesswork. Just clean, powerful spreadsheet systems.</p>
+  <div class="services-grid fade-up">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-title">Excel Dashboards</div>
+      <p class="service-desc">Interactive, visual dashboards that turn raw data into clear insights. Charts, KPIs, slicers, and drill-downs — all in one file.</p>
+      <div class="service-tags">
+        <span class="tag">Charts & Graphs</span><span class="tag">KPI Tracking</span><span class="tag">Pivot Tables</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-title">VBA & Macro Automation</div>
+      <p class="service-desc">Eliminate repetitive manual work. We automate data entry, report generation, formatting, and email sending with custom VBA code.</p>
+      <div class="service-tags">
+        <span class="tag">VBA Scripts</span><span class="tag">Macros</span><span class="tag">Automation</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-title">MIS Reporting Systems</div>
+      <p class="service-desc">End-to-end management information systems — daily, weekly, monthly reports that update automatically and go straight to decision-makers.</p>
+      <div class="service-tags">
+        <span class="tag">MIS Reports</span><span class="tag">Auto-update</span><span class="tag">Templates</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-title">Power BI Dashboards</div>
+      <p class="service-desc">Cloud-based, live dashboards connected to your data sources. Shareable, beautiful, and always up to date.</p>
+      <div class="service-tags">
+        <span class="tag">Power BI</span><span class="tag">Live Data</span><span class="tag">Cloud Reports</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-title">Data Cleaning & Analysis</div>
+      <p class="service-desc">Messy, inconsistent data? We clean, structure, and analyze it so it's ready for reporting and decision-making.</p>
+      <div class="service-tags">
+        <span class="tag">Data Cleanup</span><span class="tag">Deduplication</span><span class="tag">Analysis</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-title">Financial Models & Trackers</div>
+      <p class="service-desc">Budget trackers, P&L models, project cost sheets, inventory managers — built to your exact business logic.</p>
+      <div class="service-tags">
+        <span class="tag">Finance</span><span class="tag">Budgeting</span><span class="tag">Forecasting</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="section-tag fade-up">How It Works</div>
+  <h2 class="fade-up">Simple. Fast. <br>Reliable.</h2>
+  <p class="section-sub fade-up">From your first message to final delivery — here's what working with us looks like.</p>
+  <div class="process-steps fade-up">
+    <div class="step">
+      <div class="step-circle">01</div>
+      <div class="step-title">Discovery Call</div>
+      <p class="step-desc">We understand your data, workflow, and what problems you need solved. Free 30-min call.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">02</div>
+      <div class="step-title">Proposal & Scope</div>
+      <p class="step-desc">You get a clear scope, timeline, and fixed price. No hidden charges, ever.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">03</div>
+      <div class="step-title">Build & Review</div>
+      <p class="step-desc">We build your solution and share drafts for your feedback. Revisions included.</p>
+    </div>
+    <div class="step">
+      <div class="step-circle">04</div>
+      <div class="step-title">Deliver & Support</div>
+      <p class="step-desc">Final files delivered with documentation. Ongoing support available monthly.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="section-tag fade-up">Pricing</div>
+  <h2 class="fade-up">Transparent, <br>Fixed Pricing</h2>
+  <p class="section-sub fade-up">Choose a one-time project or a monthly retainer. All plans include revisions and dedicated support.</p>
+  <div class="pricing-grid fade-up">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price"><sup>$</sup>149</div>
+      <div class="plan-period">one-time project</div>
+      <ul class="plan-features">
+        <li>1 Excel dashboard or report</li>
+        <li>Up to 3 data sheets</li>
+        <li>2 rounds of revisions</li>
+        <li>3-day delivery</li>
+        <li>Email support</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-outline">Get Started</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="plan-name">Growth</div>
+      <div class="plan-price"><sup>$</sup>299</div>
+      <div class="plan-period">per month retainer</div>
+      <ul class="plan-features">
+        <li>Up to 8 reports/month</li>
+        <li>Dashboard maintenance</li>
+        <li>VBA automation included</li>
+        <li>Unlimited revisions</li>
+        <li>Priority support (24hr)</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-filled">Start Retainer</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price"><sup>$</sup>599</div>
+      <div class="plan-period">per month retainer</div>
+      <ul class="plan-features">
+        <li>Full MIS system build</li>
+        <li>Power BI dashboards</li>
+        <li>Unlimited projects/month</li>
+        <li>Dedicated account manager</li>
+        <li>Same-day support</li>
+      </ul>
+      <a href="#contact" class="btn-plan btn-plan-outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <div class="section-tag fade-up">Client Words</div>
+  <h2 class="fade-up">What Clients Say</h2>
+  <p class="section-sub fade-up">Real feedback from real businesses we've helped around the world.</p>
+  <div class="testimonials-grid fade-up">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Our weekly reporting used to take 6 hours. Now it runs automatically every Monday morning. Absolute game changer for our ops team.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">JM</div>
+        <div>
+          <div class="author-name">James M.</div>
+          <div class="author-role">Operations Manager, UK</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">The dashboard they built gives me a real-time view of my entire business. I use it every single day. Worth every dollar.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">SR</div>
+        <div>
+          <div class="author-name">Sarah R.</div>
+          <div class="author-role">Small Business Owner, Australia</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <p class="testimonial-text">Fast turnaround, clean work, and they actually explained everything so we could maintain it ourselves. Highly recommended.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">KL</div>
+        <div>
+          <div class="author-name">Kevin L.</div>
+          <div class="author-role">Finance Lead, Canada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-section">
+  <div>
+    <h2>Ready to Fix Your <br>Data Chaos?</h2>
+    <p class="cta-sub">Book a free 30-minute audit. We'll look at your current setup and tell you exactly how to improve it — no obligation.</p>
+  </div>
+  <a href="#contact" class="btn-cta-white">Book Free Audit →</a>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="section" id="contact" style="background:#fff;">
+  <div class="section-tag fade-up">Get In Touch</div>
+  <h2 class="fade-up">Let's Work <br>Together</h2>
+  <p class="section-sub fade-up">Fill in the form and we'll get back to you within 24 hours. Or reach out directly via email or WhatsApp.</p>
+
+  <div class="contact-layout fade-up">
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-label">Email Us</div>
+          <a href="mailto:hello@xcelpro.com" class="contact-value">hello@xcelpro.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">🔗</div>
+        <div>
+          <div class="contact-label">LinkedIn</div>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-value">View Profile →</a>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🕐</div>
+        <div>
+          <div class="contact-label">Response Time</div>
+          <div class="contact-value" style="color:var(--ink-soft);">Within 24 hours</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form-wrap">
+      <div id="form-success" style="display:none; background:var(--green-light); border:1.5px solid var(--green); border-radius:8px; padding:2rem; text-align:center;">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">✅</div>
+        <div style="font-weight:500; color:var(--green-dark); margin-bottom:0.25rem;">Message Sent!</div>
+        <div style="font-size:0.88rem; color:var(--ink-soft);">We'll get back to you within 24 hours.</div>
+      </div>
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Your Name *</label>
+            <input type="text" id="fname" placeholder="John Smith" required />
+            <span class="field-error" id="err-fname"></span>
+          </div>
+          <div class="form-group">
+            <label for="femail">Email Address *</label>
+            <input type="email" id="femail" placeholder="john@company.com" required />
+            <span class="field-error" id="err-femail"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="fservice">Service Needed *</label>
+          <select id="fservice" required>
+            <option value="">— Select a service —</option>
+            <option value="Excel Dashboard">Excel Dashboard</option>
+            <option value="VBA Automation">VBA & Macro Automation</option>
+            <option value="MIS Reporting">MIS Reporting System</option>
+            <option value="Power BI">Power BI Dashboard</option>
+            <option value="Data Cleaning">Data Cleaning & Analysis</option>
+            <option value="Financial Model">Financial Model / Tracker</option>
+            <option value="Monthly Retainer">Monthly Retainer</option>
+            <option value="Other">Other / Not Sure</option>
+          </select>
+          <span class="field-error" id="err-fservice"></span>
+        </div>
+        <div class="form-group">
+          <label for="fmessage">Tell Us About Your Project *</label>
+          <textarea id="fmessage" rows="5" placeholder="Describe your data, what you need, and any deadlines..." required></textarea>
+          <span class="field-error" id="err-fmessage"></span>
+        </div>
+        <div class="form-group">
+          <label for="fbudget">Budget Range</label>
+          <select id="fbudget">
+            <option value="">— Optional —</option>
+            <option value="Under $150">Under $150</option>
+            <option value="$150–$300">$150 – $300</option>
+            <option value="$300–$600">$300 – $600</option>
+            <option value="$600+">$600+</option>
+            <option value="Monthly retainer">Monthly retainer</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit" id="submit-btn">
+          Send Message →
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Xcel<span>Pro</span></div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+    <a href="mailto:hello@xcelpro.com">Email</a>
+  </div>
+  <div class="footer-copy">© 2025 XcelPro Solutions. All rights reserved.</div>
+</footer>
+
+
+
+</body>
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth scroll for ALL anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Contact form validation
+  const form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let valid = true;
+
+      const fields = [
+        { id: 'fname', err: 'err-fname', msg: 'Please enter your name.' },
+        { id: 'femail', err: 'err-femail', msg: 'Please enter a valid email.', type: 'email' },
+        { id: 'fservice', err: 'err-fservice', msg: 'Please select a service.' },
+        { id: 'fmessage', err: 'err-fmessage', msg: 'Please describe your project.' },
+      ];
+
+      fields.forEach(f => {
+        const el = document.getElementById(f.id);
+        const errEl = document.getElementById(f.err);
+        el.classList.remove('error');
+        errEl.textContent = '';
+        const val = el.value.trim();
+        let fieldValid = val.length > 0;
+        if (f.type === 'email') {
+          fieldValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+        }
+        if (!fieldValid) {
+          el.classList.add('error');
+          errEl.textContent = f.msg;
+          valid = false;
+        }
+      });
+
+      if (!valid) return;
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+
+      // Simulate submission (replace with your backend/Formspree endpoint)
+      setTimeout(() => {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      }, 1200);
+    });
+  }
+</script>
+</html>
